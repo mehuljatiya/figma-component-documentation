@@ -25,7 +25,7 @@ Optionally, Claude pushes a formatted documentation frame directly into your Fig
 
 ## Before you start
 
-You need an **Anthropic account** (Claude Pro, $20/month) and four tools installed:
+You need an **Anthropic account** with a Pro plan ($20/month) and four tools installed:
 
 | Tool | What it does |
 |---|---|
