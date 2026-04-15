@@ -1,71 +1,93 @@
 # figma-component-documentation
 
-A Claude Code skill (`/document-component`) that generates developer-ready component documentation from a Figma design system URL.
+A Claude Code skill that turns any Figma component into a full documentation page — markdown file, HTML preview, and an optional Figma frame — in under a minute.
 
-## What it does
+**Built for designers.** No coding required.
 
-1. Fetches design context from a Figma component URL
-2. Writes a structured `.md` documentation file
-3. Generates a self-contained `.html` preview (sticky sidebar, Do/Don't cards, color swatches, token values)
-4. Opens the preview in your browser
-5. Optionally pushes the documentation layout into the Figma design file as a frame on the same page as the component
+---
 
-## Installation
+## What you get
 
-Copy `document-component.md` into your Claude Code commands directory:
+Paste a Figma link. Claude reads the component, writes the docs, and opens a preview in your browser.
+
+Every doc includes:
+- Introduction and anatomy
+- All variants, sizes, boolean props, and states
+- Design tokens and typography specs
+- Usage guidelines with Do / Don't examples
+- Accessibility (keyboard, ARIA, screen reader)
+- Platform behaviour (Desktop / Tablet / Mobile)
+- Related components
+
+Optionally, Claude pushes a formatted documentation frame directly into your Figma file — on the same page as the component.
+
+---
+
+## Before you start
+
+You need two things installed:
+
+1. **Claude Code** — the AI tool that runs the skill
+2. **Figma MCP** — lets Claude read your Figma files
+
+→ Follow the [Setup Guide](SETUP.md) for step-by-step instructions (no coding experience needed).
+
+---
+
+## Install the skill
+
+Once Claude Code is set up, run this one command in your terminal:
 
 ```bash
-cp document-component.md ~/.claude/commands/document-component.md
+curl -o ~/.claude/commands/document-component.md https://raw.githubusercontent.com/mehuljatiya/figma-component-documentation/main/document-component.md
 ```
 
-You'll also need the [Figma MCP server](https://github.com/anthropics/claude-code) configured:
+That's it. The skill is now available in every Claude Code session.
 
-```bash
-claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user
+---
+
+## How to use it
+
+1. Open Claude Code (`claude` in terminal, or the desktop app)
+2. Copy a link to any component in your Figma file
+3. Type:
+
+```
+/document-component YOUR_FIGMA_LINK
 ```
 
-## Usage
+Claude will generate the docs, open an HTML preview in your browser, and ask if you want to push it into Figma.
 
-In Claude Code, run:
+### Example
 
 ```
-/document-component https://www.figma.com/design/<fileKey>/<name>?node-id=<nodeId>
+/document-component https://www.figma.com/design/OEwHAfVtHhfYFGKEalynMP/Cashmere?node-id=12782-2917
 ```
 
-Pass a Figma URL pointing to the component or documentation page you want to document.
+---
 
-## Output
+## Output files
 
-| File | Description |
+Two files are saved in your current directory:
+
+| File | What it is |
 |---|---|
-| `[component-name].md` | Structured markdown — Introduction, Anatomy, Variations, Props & Tokens, Usage Guidelines, Accessibility, Platform, Related Components |
-| `[component-name].html` | Self-contained HTML preview with sticky sidebar nav, Do/Don't cards, inline color swatches |
+| `[component-name].md` | Clean markdown — ready to paste into Notion, Confluence, or any docs tool |
+| `[component-name].html` | Standalone preview with sidebar navigation, Do/Don't cards, and token swatches — just open in any browser |
 
-## Documentation sections
+---
 
-- **Introduction** — what the component is, types, and key behaviours
-- **Anatomy** — structural parts with ASCII diagram and table
-- **Variations** — Type, Size, Boolean Props, States (only states defined in Figma)
-- **Props & Tokens** — prop table, design tokens per variant, size tokens, typography
-- **Usage Guidelines** — When to use, When not to use, Do/Don't pairs
-- **Accessibility** — Keyboard interactions, ARIA attributes, focus behavior, screen reader notes
-- **Platform** — Desktop, Tablet, Mobile behaviour
-- **Related Components** — components that work alongside or instead of this one
+## Pushing to Figma
 
-## Push to Figma
+After the preview opens, Claude will ask:
 
-After generating the docs, Claude will ask if you want to push them into Figma. If yes, it places a documentation frame directly on the same page as the shared component — no new page is created.
+> "Would you like to push it into the Figma design file?"
 
-The frame uses the Figma Plugin API (`use_figma`) and includes component visual samples at key sections (Introduction, Variations, Platform).
+Say yes and Claude places a documentation frame on the same page as your component — no new pages created, no manual copying.
 
-## Design system compatibility
+---
 
-Built for the **Cashmere Design System** (Cashfree) but the structure follows industry-standard patterns (Atlassian, Carbon, Polaris, Material) and works with any Figma design system.
+## Need help?
 
-Token pattern: `--sds-[category]-[property]-[modifier]`
-
-## Requirements
-
-- [Claude Code](https://claude.ai/code)
-- Figma MCP server configured (OAuth, no personal token needed)
-- Figma file open in desktop app or browser with plugin access for the push step
+- [Setup Guide](SETUP.md) — step-by-step installation from scratch
+- [Report an issue](https://github.com/mehuljatiya/figma-component-documentation/issues)
