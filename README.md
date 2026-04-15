@@ -25,14 +25,14 @@ Optionally, Claude pushes a formatted documentation frame directly into your Fig
 
 ## Before you start
 
-You need four things installed:
+You need an **Anthropic account** (Claude Pro, $20/month) and four tools installed:
 
 | Tool | What it does |
 |---|---|
-| **Claude Code** | The AI tool that runs the skill |
+| **Claude Code** | The AI assistant that runs the skill |
 | **Figma MCP** | Lets Claude read your Figma files and write documentation frames back into them |
-| **Chrome DevTools MCP** | Lets Claude open and navigate Figma in your browser (needed for the push step) |
-| **figma-friend** | Adds Figma-specific browser controls on top of Chrome DevTools |
+| **Chrome DevTools plugin** | Lets Claude open and navigate Figma in your browser (needed for the push step) |
+| **figma-friend plugin** | Adds Figma-specific browser controls on top of Chrome DevTools |
 
 → Follow the [Setup Guide](SETUP.md) for step-by-step instructions (no coding experience needed).
 
@@ -65,14 +65,16 @@ Claude will generate the docs, open an HTML preview in your browser, and ask if 
 ### Example
 
 ```
-/document-component https://www.figma.com/design/OEwHAfVtHhfYFGKEalynMP/Cashmere?node-id=12782-2917
+/document-component https://www.figma.com/design/YOURFILEID/DesignSystem?node-id=123-456
 ```
+
+The link needs to point to a specific component — the URL must contain `node-id=`. Right-click any component in Figma → **Copy link** to get the right URL.
 
 ---
 
 ## Output files
 
-Two files are saved in your current directory:
+Two files are saved in the folder you were in when you opened Terminal (usually your home folder). To save to a specific place, `cd` into it before running `claude`.
 
 | File | What it is |
 |---|---|
