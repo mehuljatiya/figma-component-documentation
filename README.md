@@ -25,10 +25,14 @@ Optionally, Claude pushes a formatted documentation frame directly into your Fig
 
 ## Before you start
 
-You need two things installed:
+You need four things installed:
 
-1. **Claude Code** — the AI tool that runs the skill
-2. **Figma MCP** — lets Claude read your Figma files
+| Tool | What it does |
+|---|---|
+| **Claude Code** | The AI tool that runs the skill |
+| **Figma MCP** | Lets Claude read your Figma files and write documentation frames back into them |
+| **Chrome DevTools MCP** | Lets Claude open and navigate Figma in your browser (needed for the push step) |
+| **figma-friend** | Adds Figma-specific browser controls on top of Chrome DevTools |
 
 → Follow the [Setup Guide](SETUP.md) for step-by-step instructions (no coding experience needed).
 

@@ -1,6 +1,12 @@
 # Setup Guide
 
-This guide walks you through everything you need to start generating component documentation from Figma. It should take about 10 minutes.
+This guide walks you through everything you need to start generating component documentation from Figma. It should take about 15 minutes.
+
+**What you'll install:**
+- Claude Code — the AI assistant
+- Figma MCP — lets Claude read and write to Figma
+- Chrome DevTools MCP — lets Claude control your browser
+- figma-friend — Figma-specific browser automation
 
 ---
 
@@ -48,7 +54,35 @@ This lets Claude read your Figma files.
 
 ---
 
-## Step 3 — Install the skill
+## Step 3 — Add Chrome DevTools MCP
+
+This lets Claude open and navigate Figma in your browser, which is needed for the push-to-Figma step.
+
+1. In your terminal, run:
+   ```
+   claude mcp add chrome-devtools npx @agentdeskai/browser-tools-mcp@latest
+   ```
+
+2. Restart Claude Code, then run `/mcp` — you should see **chrome-devtools** listed.
+
+> **Note:** This requires Chrome to be installed on your machine. Claude will open and control a browser tab automatically when pushing docs to Figma.
+
+---
+
+## Step 4 — Add figma-friend
+
+figma-friend is a Figma-specific layer on top of Chrome DevTools that gives Claude better control over the Figma canvas.
+
+1. In your terminal, run:
+   ```
+   claude mcp add figma-friend npx github:markacianfrani/claude-code-figma
+   ```
+
+2. Restart Claude Code, then run `/mcp` — you should see **figma-friend** listed.
+
+---
+
+## Step 5 — Install the skill
 
 Run this one command in Terminal:
 
@@ -62,7 +96,7 @@ To verify it's installed, start Claude Code and type `/doc` — you should see `
 
 ---
 
-## Step 4 — Use it
+## Step 6 — Use it
 
 1. Open your Figma file and copy the link to a component (right-click on the component → Copy link)
 
@@ -87,6 +121,9 @@ Node.js wasn't installed correctly, or the install path isn't in your PATH. Try 
 **"Figma not connected" or no design context returned**
 Run `/mcp` inside Claude Code and check that Figma shows as connected. If not, re-run the `claude mcp add` command from Step 2 and authenticate again.
 
+**Push to Figma fails or Claude says it can't control the browser**
+Run `/mcp` and check that both **chrome-devtools** and **figma-friend** are listed. If either is missing, re-run the install commands from Steps 3 and 4. Also make sure Chrome is installed on your machine.
+
 **Claude says it can't read the Figma file**
 Make sure the Figma link is to a specific component or frame (the URL should contain `node-id=`). Links to the file root won't work as well. Also ensure you have at least view access to the file.
 
@@ -96,6 +133,18 @@ Check that the file was saved in the right place:
 ls ~/.claude/commands/
 ```
 You should see `document-component.md` listed. If not, re-run the `curl` command from Step 3.
+
+---
+
+## Quick check — everything installed?
+
+Run `/mcp` inside Claude Code. You should see all four of these listed:
+
+- `figma` — connected
+- `chrome-devtools` — listed
+- `figma-friend` — listed
+
+If any are missing, re-run the relevant step above.
 
 ---
 
