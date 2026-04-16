@@ -8,6 +8,42 @@ You are generating developer-ready component documentation from a Figma design s
 
 ---
 
+## Step 0 — Prerequisites Check
+
+Before doing anything else, verify the required tools are available and ask for all permissions upfront.
+
+### Check Figma MCP
+
+Call `mcp__claude_ai_Figma__whoami`. If it fails or returns an auth error:
+
+> **Setup required before this skill can run:**
+>
+> 1. Open the **Claude desktop app**
+> 2. Go to **Settings → Integrations** (or Extensions)
+> 3. Find **Figma** and click **Enable**
+> 4. **Quit and relaunch** Claude Code — the MCP won't load until you restart
+> 5. Then re-run `/document-component` with your Figma URL
+>
+> If you've already done this and it still fails, run `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user` in your terminal, then restart.
+
+Stop here — do not proceed until Figma MCP is confirmed working.
+
+### Ask for all permissions upfront
+
+Before running any tools, tell the user exactly what you'll need to do:
+
+> "To generate this documentation I'll need to:
+> - Read your Figma file (Figma MCP)
+> - Create files in the current directory (markdown + HTML)
+> - Open the HTML file in your browser
+> - Optionally open Figma in Chrome to push the docs (Chrome DevTools MCP)
+>
+> Approve each tool call as it comes up, or run `/less-permission-prompts` to reduce future prompts."
+
+Do NOT ask one by one as you go — front-load this so the user knows what's coming.
+
+---
+
 ## Step 1 — Parse the Figma URL
 
 Extract `fileKey` and `nodeId` from the URL:
